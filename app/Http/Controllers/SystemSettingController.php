@@ -252,10 +252,7 @@ class SystemSettingController extends Controller
         }
         public function ViewFooterContentProcess(Request $request){
             $data = $request->all();
-            if ($request->file("fileUpload") != null) {
-                $path = $request->file("fileUpload")->store("Footer_Images");
-                $data["icon"] = $path;
-            }
+            $data['icon'] = $request->store_location;
             if ($request->name == "GetInTouch" || $request->name == "footer2") {
                 $data['social_media'] = implode('@',$request->social);
                 $data['social_link'] = implode('@',$request->link);
