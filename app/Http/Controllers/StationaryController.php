@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stationary;
+use App\Models\StationaryCategory;
 use Illuminate\Http\Request;
 
 class StationaryController extends Controller
@@ -14,7 +15,9 @@ class StationaryController extends Controller
      */
     public function index()
     {
-        return view('admin.stationary.index');
+        return view('admin.stationary.index', [
+            'stationries' => Stationary::with('category')->orderBy('id', 'DESC')->get()
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class StationaryController extends Controller
      */
     public function create()
     {
-        return view('admin.stationary.create');
+        return view('admin.stationary.create', [
+            'categories' => StationaryCategory::orderBy('id', 'DESC')->get()
+        ]);
     }
 
     /**
@@ -35,7 +40,25 @@ class StationaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'price' => ['required', 'numeric'],
+            'stock' => ['required', 'numeric'],
+            'category' => ['required', 'exists:stationary_categories,id'],
+            'image'    => ['required', 'image'],
+            'short_description' => ['required'],
+            'description' => ['required'],
+        ]);
+        Stationary::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' =>  $request->stock,
+            'stationary_category_id' =>  $request->category,
+            'image'    =>  $this->fileUpload('images/', $request->file('image')),
+            'short_description' =>  $request->short_description,
+            'description' =>  $request->description,
+        ]);
+        return back()->with('message', 'Stationary added successfully');
     }
 
     /**
@@ -80,6 +103,7 @@ class StationaryController extends Controller
      */
     public function destroy(Stationary $stationary)
     {
-        //
+        $stationary->delete();
+        return back()->with('message', 'Stationary removed successfully');
     }
 }

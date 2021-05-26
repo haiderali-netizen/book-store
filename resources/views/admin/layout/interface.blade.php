@@ -268,6 +268,8 @@
                 return false;
                 }
             });
+            // Ckeditor
+            CKEDITOR.replace( '.editor' );
             // Data Table
             $('#myTable').DataTable({
                 // rowReorder: {
@@ -347,6 +349,7 @@
                 });
             // meta tags script end
     </script>
+    @yield('scripts')
 </body>
 
 </html>

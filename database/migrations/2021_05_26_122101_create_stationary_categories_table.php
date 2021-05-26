@@ -15,7 +15,9 @@ class CreateStationaryCategoriesTable extends Migration
     {
         Schema::create('stationary_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
