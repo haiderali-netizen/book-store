@@ -57,7 +57,7 @@
         <div class="page-sidebar">
             <div class="logo-box">
                 <a href="#" class="logo-text">
-                    <img src="{{URL::to('public/assests/img/logo.png')}}" alt="" width="115px">
+                    <img src="{{ asset('assests/img/logo.png') }}" alt="" width="115px">
                 </a>
                 <a href="#" id="sidebar-close"><i class="material-icons">close</i></a> <a href="#" id="sidebar-state"><i
                         class="material-icons">adjust</i><i
@@ -80,7 +80,7 @@
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{url('public/admin')}}/assets/images/avatars/profile-image-1.png"
+                                <img src="{{ asset('adminStyle/assets/images/avatars/profile-image-1.png') }}"
                                     alt="profile image">
                                 <span>{{Session::get("onlineuser")->username}}</span><i
                                     class="material-icons dropdown-icon">keyboard_arrow_down</i>
