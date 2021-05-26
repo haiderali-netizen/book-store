@@ -9,65 +9,104 @@
 <li class="breadcrumb-item active" aria-current="page">Add</li>
 @endsection
 @section("content")
-@if(Session::has('success'))
-@php $message = Session::get('success'); @endphp
-<div class="alert alert-success">{{$message}}</div>
-@php Session::pull('success'); @endphp
+@if(Session::has('message'))
+<div class="alert alert-success">{{ Session::get('message') }}</div>
 @endif
-<form action="" method="post" enctype="multipart/form-data">
+<form action="{{ Route('stationary.store') }}" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <label for="">Name</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+            @error('name')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <label for="">Price</label>
-            <input type="number" name="price" class="form-control" required>
+            <input type="number" min="1" name="price" class="form-control" value="{{ old('price') }}">
+
+            @error('price')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <label for="">Stock</label>
-            <input type="number" min="0" name="stock" class="form-control" required>
+            <input type="number" min="1" name="stock" class="form-control" value="{{ old('stock') }}">
+            @error('stock')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+        <div class="col-sm-6">
+            <img src="" alt="" class="d-none mt-1" id="imgDis" width="100px" height="100px">
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <label for="">Category</label>
-            <select name="categoryId" class="form-control" required>
-                <option value="">Select Category</option>
-                <option value="">Pencils</option>
-                <option value="">Pen</option>
-                <option value="">Clip Board</option>
+            <select name="category" class="form-control" required>
+                <option value="" selected disabled>Select Category</option>
+                @foreach ($categories as $category)
+                <option {{ old('category') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
+                    {{ $category->name }}</option>
+                @endforeach
             </select>
+            @error('category')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6">
             <label for=""> Image</label>
-            <input type="file" name="cover_image" class="form-control" required>
+            <input type="file" name="image" id="img" class="form-control" accept="image/*">
+            @error('image')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <label for=""> Short Description</label>
-            <textarea name="description" class="form-control"></textarea>
+            <textarea name="short_description" class="form-control">{{ old('short_description') }}</textarea>
+            @error('short_description')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <label for=""> Detail Description</label>
-            <textarea name="editor1" class="form-control"></textarea>
+            <textarea name="description" class="form-control">{{ old('description') }}</textarea>
+            @error('description')
+            <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
     </div><br>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <label for=""> Recommded For You All</label>
             <input type="checkbox" class="mr-3" name="recommded_all" value="1" style="height: 11px;">
             <label for=""> Recommded For You Only</label>
             <input type="checkbox" name="recommded_only" value="1" style="height: 11px;">
         </div>
-    </div><br />
+    </div><br /> --}}
 
     <input type="submit" class="btn btn-primary" value="Save">
 </form>
 
+@endsection
+
+@section('scripts')
+<script>
+    const img = document.querySelector("#img")
+    const imgDis = document.querySelector("#imgDis")
+
+    img.addEventListener('change', (e) => {
+        let file = e.target.files[0];
+        let url = URL.createObjectURL(file);
+
+        imgDis.setAttribute('src', url)
+        imgDis.classList.remove('d-none')
+    });
+</script>
 @endsection

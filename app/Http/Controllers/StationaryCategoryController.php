@@ -14,7 +14,9 @@ class StationaryCategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.stationary.category.index');
+        return view('admin.stationary.category.index', [
+            'categories' => StationaryCategory::orderBy('id', 'DESC')->get()
+        ]);
     }
 
     /**
@@ -35,7 +37,13 @@ class StationaryCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'unique:stationary_categories,name']
+        ]);
+        StationaryCategory::create([
+            'name' => $request->name
+        ]);
+        return back()->with('message', 'Category added successfully.');
     }
 
     /**
@@ -57,7 +65,9 @@ class StationaryCategoryController extends Controller
      */
     public function edit(StationaryCategory $stationaryCategory)
     {
-        //
+        return view('admin.stationary.category.edit', [
+            'category' => $stationaryCategory,
+        ]);
     }
 
     /**
@@ -69,7 +79,13 @@ class StationaryCategoryController extends Controller
      */
     public function update(Request $request, StationaryCategory $stationaryCategory)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'unique:stationary_categories,name,' . $stationaryCategory->id]
+        ]);
+        $stationaryCategory->update([
+            'name' => $request->name
+        ]);
+        return back()->with('message', 'Category updated successfully.');
     }
 
     /**
@@ -80,6 +96,7 @@ class StationaryCategoryController extends Controller
      */
     public function destroy(StationaryCategory $stationaryCategory)
     {
-        //
+        $stationaryCategory->delete();
+        return back()->with('message', 'Category removed successfully.');
     }
 }

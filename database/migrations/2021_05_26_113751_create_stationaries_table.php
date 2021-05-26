@@ -15,7 +15,15 @@ class CreateStationariesTable extends Migration
     {
         Schema::create('stationaries', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->float('price');
+            $table->float('stock');
+            $table->foreignId('stationary_category_id')->constrained('stationary_categories');
+            $table->string('image');
+            $table->mediumText('short_description');
+            $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
