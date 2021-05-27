@@ -14,4 +14,9 @@ class StationaryCategory extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function stationaries()
+    {
+        return $this->hasMany(Stationary::class);
+    }
 }

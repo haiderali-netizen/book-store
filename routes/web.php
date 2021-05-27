@@ -17,6 +17,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\MetaTagsController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Pages\StationaryController as PublicStationaryController;
 use App\Http\Controllers\StationaryCategoryController;
 use App\Http\Controllers\StationaryController;
 
@@ -83,6 +84,8 @@ Route::prefix('/')->middleware("IsVisitor")->group(function () {
     Route::get('/order-detail/{id}', [OrderController::class, 'OrderPreview']);
     Route::get('/pdf-order', [OrderController::class, 'PDFOrder']);
     Route::post('/pdf-order', [OrderController::class, 'PDFOrderProcess']);
+
+    Route::get('stationary', [PublicStationaryController::class, 'all_stationary']);
 });
 // admin controllers
 Route::get('/admin', [UserController::class, "Login"]);

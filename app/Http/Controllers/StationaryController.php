@@ -80,7 +80,10 @@ class StationaryController extends Controller
      */
     public function edit(Stationary $stationary)
     {
-        //
+        return view('admin.stationary.edit', [
+            'stationary' => $stationary,
+            'categories' => StationaryCategory::orderBy('id', 'DESC')->get()
+        ]);
     }
 
     /**
@@ -92,7 +95,25 @@ class StationaryController extends Controller
      */
     public function update(Request $request, Stationary $stationary)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'price' => ['required', 'numeric'],
+            'stock' => ['required', 'numeric'],
+            'category' => ['required', 'exists:stationary_categories,id'],
+            'image'    => ['nullable', 'image'],
+            'short_description' => ['required'],
+            'description' => ['required'],
+        ]);
+        $stationary->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' =>  $request->stock,
+            'stationary_category_id' =>  $request->category,
+            'image'    => $request->file('image') ? $this->fileUpload('images/', $request->file('image')) : $stationary->image,
+            'short_description' =>  $request->short_description,
+            'description' =>  $request->description,
+        ]);
+        return back()->with('message', 'Stationary Updated successfully');
     }
 
     /**
