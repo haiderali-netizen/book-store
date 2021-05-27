@@ -224,10 +224,6 @@ Route::prefix('admin')->middleware("IsLogin")->group(function () {
     // stationary
     Route::resource('stationary', StationaryController::class);
     Route::resource('stationary-category', StationaryCategoryController::class);
-    Route::prefix('stationary')
-        ->name('stationary')
-        ->group(function () {
-        });
     // faq
     Route::prefix('faq')->group(function () {
         Route::get("/", [FAQController::class, "Index"]);

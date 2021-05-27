@@ -36,7 +36,7 @@
       });
     </script>
     <!-- Fav Icon -->
-    <link rel="icon" type="image/png" href="{{URL::to('storage/app')}}/{{$favicon != null ? $favicon->image : ''}}">
+    <link rel="icon" type="image/png" href="{{ asset($favicon != null ? $favicon->image : '') }}">
     <!-- style file -->
     <link href="{{ asset('assests/css/style.css')}}" rel="stylesheet">
     <!-- bootstrap cdn -->
@@ -59,10 +59,9 @@
                             <nav class="">
                                 <div class="row">
                                     <div class="w10">
-                                        <a class="navbar-brand" href="{{URL::to('/')}}"><img
-                                                src="{{URL::to('storage/app')}}/{{$logo != null ? $logo->image : ''}}"
-                                                class="img-fluid" alt="logo" class="img-fluid"
-                                                style="width: 100px;"></a>
+                                        <a class="navbar-brand" href="{{ env('APP_URL') }}">
+                                            <img src="{{ asset($logo != null ? $logo->image : '') }}" class="img-fluid"
+                                                alt="logo" class="img-fluid" style="width: 100px;"></a>
                                     </div>
                                     <div class="w20">
                                         <div class="input-group ml5" style="padding-left: 68px">
@@ -114,7 +113,7 @@
                                                 <button class="btn dropdown-toggle background-remove"
                                                     data-toggle="dropdown">
                                                     <img class="rounded-circle"
-                                                        src="{{URL::to('public/admin/assets/images/avatars/profile-image-2.png')}}"
+                                                        src="{{ asset('adminStyle/assets/images/avatars/profile-image-2.png') }}"
                                                         width="40px" height="40px">
                                                 </button>
                                                 <div class="dropdown-menu">
