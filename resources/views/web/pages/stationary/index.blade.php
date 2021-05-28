@@ -16,9 +16,14 @@
                                 <div>
                                     <li>
                                         <div class="sort1">
+                                            <h6 class="">
+                                                <a href="{{ url('stationary') }}" class="pl-4 text-dark">ALL
+                                                </a>
+                                            </h6>
                                             @foreach ($categories as $category)
                                             <h6 class="">
-                                                <a href="#" class="pl-4 text-dark">{{ $category->name }}
+                                                <a href="{{ url('stationary', $category->name) }}"
+                                                    class="pl-4 text-dark">{{ $category->name }}
                                                 </a>
                                                 <small class="text-danger">({{ $category->stationaries_count }})</small>
                                             </h6>

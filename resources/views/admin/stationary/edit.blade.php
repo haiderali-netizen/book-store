@@ -50,9 +50,8 @@
             <select name="category" class="form-control" required>
                 <option value="" selected disabled>Select Category</option>
                 @foreach ($categories as $category)
-                <option {{ $stationary->category->id == $category->id ? 'selected' : '' }}
-                    value="{{ $stationary->category->id }}">
-                    {{ $stationary->category->name }}</option>
+                <option {{ $stationary->category->id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
+                    {{ $category->name }}</option>
                 @endforeach
             </select>
             @error('category')

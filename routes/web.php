@@ -21,18 +21,6 @@ use App\Http\Controllers\Pages\StationaryController as PublicStationaryControlle
 use App\Http\Controllers\StationaryCategoryController;
 use App\Http\Controllers\StationaryController;
 
--
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -86,6 +74,7 @@ Route::prefix('/')->middleware("IsVisitor")->group(function () {
     Route::post('/pdf-order', [OrderController::class, 'PDFOrderProcess']);
 
     Route::get('stationary', [PublicStationaryController::class, 'all_stationary']);
+    Route::get('stationary/{category}', [PublicStationaryController::class, 'stationary']);
 });
 // admin controllers
 Route::get('/admin', [UserController::class, "Login"]);

@@ -144,21 +144,8 @@
                 </header>
             </div>
         </form>
-        <div class="container shadow">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav>
-                        <ul class="nav justify-content-center p-2">
-                            @foreach ($MainMenu as $menu)
-                            <li>
-                                <a class="dropdown-item" href="{{URL::to('')}}/{{$menu->link}}">{{$menu->name}}</a>
-                            </li>
-                            @endforeach
-
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+        <div class="ml-4 mr-4 shadow-sm">
+            @include('web.partials.navbar')
         </div>
 
         <style>

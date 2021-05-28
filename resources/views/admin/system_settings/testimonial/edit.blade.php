@@ -1,20 +1,21 @@
 @php
-    if(Session::has('onlineuser')):
-        $value = Session::get('onlineuser');
-    endif;
+if(Session::has('onlineuser')):
+$value = Session::get('onlineuser');
+endif;
 @endphp
 @extends("admin.layout.interface")
 @section("breadcrumb")
-    <li class="breadcrumb-item"><a href="{{URL::to('/admin')}}">Admin</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="#">System_Settings</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="{{URL::to('/admin/system-settings/testimonial')}}">News</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Update</li>
+<li class="breadcrumb-item"><a href="{{URL::to('/admin')}}">Admin</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="#">System_Settings</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{URL::to('/admin/system-settings/testimonial')}}">News</a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">Update</li>
 @endsection
 @section("content")
 @if(Session::has('success'))
-    @php $message = Session::get('success'); @endphp
-        <div class="alert alert-success">{{$message}}</div>
-    @php Session::pull('success'); @endphp
+@php $message = Session::get('success'); @endphp
+<div class="alert alert-success">{{$message}}</div>
+@php Session::pull('success'); @endphp
 @endif
 <form action="" method="post" enctype="multipart/form-data">
     <div class="row">
@@ -29,8 +30,8 @@
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="mb-2 mt-2" width="100px" height="100px">
-            <input type="file" name="image"  class="form-control">
+            <img src="{{ asset($data->image) }}" alt="" class="mb-2 mt-2" width="100px" height="100px">
+            <input type="file" name="image" class="form-control">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <label for="">Rating</label>
@@ -49,7 +50,7 @@
             <textarea name="description" value="" class="form-control">{{$data->description}}</textarea>
         </div>
     </div>
-    <br/>
+    <br />
 
     <input type="submit" class="btn btn-primary" value="Update">
 </form>

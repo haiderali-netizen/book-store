@@ -19,4 +19,15 @@ class StationaryController extends Controller
             'meta'  => $meta
         ]);
     }
+
+    public function stationary($category)
+    {
+        $meta = MetaTagsModel::where('name_page', 'All Books')->first();
+        $categoryId = StationaryCategory::where('name', $category)->first();
+        return view('web.pages.stationary.index', [
+            'stationaries' => Stationary::with('category')->where('stationary_category_id', $categoryId->id)->orderBy('id', 'desc')->paginate(12),
+            'categories'  => StationaryCategory::withCount('stationaries')->get(),
+            'meta'  => $meta
+        ]);
+    }
 }

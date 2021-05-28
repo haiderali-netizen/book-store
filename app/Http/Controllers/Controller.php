@@ -18,4 +18,12 @@ class Controller extends BaseController
 
         return env('APP_URL') . $destination . $file_name;
     }
+
+    public function imgUpload($destination, $file)
+    {
+        $file_name = date('Y-m-d') . 'T' . time() . '.' . $file->getClientOriginalExtension();
+        $file->move($destination, $file_name);
+
+        return $destination . $file_name;
+    }
 }
