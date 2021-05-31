@@ -52,6 +52,20 @@ endif;
         </ul>
     </li>
     <li>
+        <a href="#">
+            <i class="material-icons-outlined">G</i>Gift
+            <i class="material-icons has-sub-menu">add</i>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="{{ Route('gift.index') }}">Gift</a>
+            </li>
+            <li>
+                <a href="{{ Route('gift-category.index') }}">Gift Categories</a>
+            </li>
+        </ul>
+    </li>
+    <li>
         <a href="#"><i class="material-icons-outlined">article</i>Orders<i
                 class="material-icons has-sub-menu">add</i></a>
         <ul class="sub-menu">
@@ -175,4 +189,3 @@ endif;
     </li>
     @endif
 </ul>
-

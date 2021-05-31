@@ -14,6 +14,8 @@ use App\Http\Controllers\LogoFaviconController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\GiftCategoryController;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\MetaTagsController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\OrderController;
@@ -85,6 +87,17 @@ Route::prefix('admin')->middleware("IsLogin")->group(function () {
     Route::post("change-password", [Usercontroller::class, "changePasswordProcess"]);
     Route::get("change-details", [Usercontroller::class, "changeDetail"]);
     Route::post("change-details", [Usercontroller::class, "changeDetailProcess"]);
+
+    // stationary routes
+    Route::resource('stationary', StationaryController::class);
+    Route::resource('stationary-category', StationaryCategoryController::class);
+    // gift routes
+    // Route::get('gift-category/{id}', [GiftCategoryController::class, 'destroy'])->name('giftcategorydelete');
+    Route::resource('gift-category', GiftCategoryController::class);
+    // Route::get('gift/{id}', [GiftController::class, 'destroy'])->name('giftdelete');
+    Route::resource('gift', GiftController::class);
+
+
     // newsLetter Tags
     Route::group(['prefix' => 'newsLetter'], function () {
         Route::get("/", [NewsLetterController::class, "View"]);
@@ -213,9 +226,7 @@ Route::prefix('admin')->middleware("IsLogin")->group(function () {
             Route::post("/update/{id}", [SpecialFlashController::class, "EditSpecialProcess"]);
         });
     });
-    // stationary
-    Route::resource('stationary', StationaryController::class);
-    Route::resource('stationary-category', StationaryCategoryController::class);
+
     // faq
     Route::prefix('faq')->group(function () {
         Route::get("/", [FAQController::class, "Index"]);
