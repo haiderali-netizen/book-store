@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\MetaTagsModel;
 use App\Models\Stationary;
 use App\Models\StationaryCategory;
-use Illuminate\Http\Request;
 
 class StationaryController extends Controller
 {

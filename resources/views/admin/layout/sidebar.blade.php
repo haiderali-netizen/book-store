@@ -47,7 +47,10 @@ endif;
                 <a href="{{ Route('stationary.index') }}">Stationary</a>
             </li>
             <li>
-                <a href="{{ Route('stationary-category.index') }}">Stationary Categories</a>
+                <a href="{{ Route('stationary-category.index') }}">Categories</a>
+            </li>
+            <li>
+                <a href="{{ Route('stationary-order.index') }}">Orders</a>
             </li>
         </ul>
     </li>
@@ -61,7 +64,10 @@ endif;
                 <a href="{{ Route('gift.index') }}">Gift</a>
             </li>
             <li>
-                <a href="{{ Route('gift-category.index') }}">Gift Categories</a>
+                <a href="{{ Route('gift-category.index') }}">Categories</a>
+            </li>
+            <li>
+                <a href="{{ Route('gift-category.index') }}">Orders</a>
             </li>
         </ul>
     </li>
@@ -70,7 +76,7 @@ endif;
                 class="material-icons has-sub-menu">add</i></a>
         <ul class="sub-menu">
             <li>
-                <a href="{{URL::to('admin/orders')}}">All Orders</a>
+                <a href="{{URL::to('admin/orders')}}">Book Orders</a>
             </li>
             <li>
                 <a href="{{URL::to('admin/pdf-orders')}}">PDF Orders</a>

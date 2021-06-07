@@ -54,8 +54,13 @@
             <select name="category" class="form-control @error('category') is-invalid @enderror" required>
                 <option value="" selected disabled>Select Category</option>
                 @foreach ($categories as $category)
+                @if($gift->gift_category_id)
                 <option {{ $gift->gift_category_id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
                     {{ $category->name }}</option>
+                @else
+                <option value="{{ $category->id }}">
+                    {{ $category->name }}</option>
+                @endif
                 @endforeach
             </select>
             @error('category')

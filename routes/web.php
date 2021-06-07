@@ -19,10 +19,12 @@ use App\Http\Controllers\GiftController;
 use App\Http\Controllers\MetaTagsController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Pages\GiftController as PagesGiftController;
 use App\Http\Controllers\Pages\StationaryController as PublicStationaryController;
 use App\Http\Controllers\StationaryCategoryController;
 use App\Http\Controllers\StationaryController;
-
+use App\Http\Controllers\StationaryOrderController;
+use App\Models\StationaryOrder;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -77,6 +79,8 @@ Route::prefix('/')->middleware("IsVisitor")->group(function () {
 
     Route::get('stationary', [PublicStationaryController::class, 'all_stationary']);
     Route::get('stationary/{category}', [PublicStationaryController::class, 'stationary']);
+    Route::get('gift', [PagesGiftController::class, 'all_gifts']);
+    Route::get('gift/{category}', [PagesGiftController::class, 'gift']);
 });
 // admin controllers
 Route::get('/admin', [UserController::class, "Login"]);
@@ -91,10 +95,9 @@ Route::prefix('admin')->middleware("IsLogin")->group(function () {
     // stationary routes
     Route::resource('stationary', StationaryController::class);
     Route::resource('stationary-category', StationaryCategoryController::class);
+    Route::resource('stationary-order', StationaryOrderController::class);
     // gift routes
-    // Route::get('gift-category/{id}', [GiftCategoryController::class, 'destroy'])->name('giftcategorydelete');
     Route::resource('gift-category', GiftCategoryController::class);
-    // Route::get('gift/{id}', [GiftController::class, 'destroy'])->name('giftdelete');
     Route::resource('gift', GiftController::class);
 
 

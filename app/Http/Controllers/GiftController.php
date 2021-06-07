@@ -127,9 +127,8 @@ class GiftController extends Controller
      * @param  \App\Models\Gift  $gift
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Gift $gift)
     {
-        $gift = Gift::find($id);
         $gift->delete();
         return back()
             ->with(['message' => 'Gift item removed successfully.']);

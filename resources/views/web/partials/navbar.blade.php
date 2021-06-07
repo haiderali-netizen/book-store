@@ -21,6 +21,9 @@
                     <a class="dropdown-item" href="{{ url('stationary') }}">STATIONARY</a>
                 </li>
                 <li>
+                    <a class="dropdown-item" href="{{ url('gift') }}">GIFTS</a>
+                </li>
+                <li>
                     <a class="dropdown-item" href="{{ url('news') }}">NEWS</a>
                 </li>
                 <li>

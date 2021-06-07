@@ -17,15 +17,15 @@
                                     <li>
                                         <div class="sort1">
                                             <h6 class="">
-                                                <a href="{{ url('stationary') }}" class="pl-4 text-dark">ALL
+                                                <a href="{{ url('gift') }}" class="pl-4 text-dark">ALL
                                                 </a>
                                             </h6>
                                             @foreach ($categories as $category)
                                             <h6 class="">
-                                                <a href="{{ url('stationary', $category->name) }}"
+                                                <a href="{{ url('gift', $category->slug) }}"
                                                     class="pl-4 text-dark">{{ $category->name }}
                                                 </a>
-                                                <small class="text-danger">({{ $category->stationaries_count }})</small>
+                                                <small class="text-danger">({{ $category->gifts_count }})</small>
                                             </h6>
                                             @endforeach
 
@@ -36,15 +36,15 @@
                         </div>
                     </div>
                     <div class="window_panel">
-                        @foreach ($stationaries as $stationary)
+                        @foreach ($gifts as $gift)
                         <div class="product">
                             {{-- <a href="{{URL::to('/book-detail')}}/<%product.id%>"> --}}
-                            <img src="{{ $stationary->image }}" alt="" width="150px" height="200px">
+                            <img src="{{ $gift->image }}" alt="" width="150px" height="200px">
                             {{-- </a> --}}
                             <br>
                             <div ng-hide="changeText">
-                                <h6>{{ $stationary->name }}</h6>
-                                </p>{{ $stationary->category? $stationary->category->name : '' }}</p>
+                                <h6>{{ $gift->title }}</h6>
+                                </p>{{ $gift->category? $gift->category->name : ''  }}</p>
                                 {{-- <p>
                                     @for ($i=0;$i < 5; $i++) <i
                                         class="fa fa-star <% {{$i}} < product.rating ? 'text-warning' : '' %>"></i>
@@ -53,13 +53,11 @@
                             </div>
                             <div>
                                 <p>
-                                    {{ $stationary->price }}
-                                    <span class="text-dull"><s>{{ $stationary->price*2 }}</s></span>
+                                    {{ $gift->price }}
+                                    <span class="text-dull"><s>{{ $gift->price*1.2 }}</s></span>
                                 </p>
-                                <div class="btn btn-primary btn-sm AddToCart" productid="{{ $stationary->id }}">Add to
-                                    cart
+                                <div class="btn btn-primary btn-sm AddToCart" productid="{{ $gift->id }}">Add To Cart
                                 </div>
-
                             </div>
                         </div>
                         @endforeach
@@ -67,7 +65,7 @@
                 </div>
             </div>
             <div class="text-center">
-                {{ $stationaries->links() }}
+                {{ $gifts->links() }}
             </div>
         </div>
     </div>

@@ -102,9 +102,9 @@ class GiftCategoryController extends Controller
      * @param  \App\Models\GiftCategory  $giftCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(GiftCategory $giftCategory)
     {
-        $giftCategory = GiftCategory::find($id);
+        // $giftCategory = GiftCategory::find($id);
         $giftCategory->delete();
         return back()
             ->with(['message' => 'Gift category removed successfully']);

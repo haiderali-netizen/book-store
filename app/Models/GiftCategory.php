@@ -16,4 +16,9 @@ class GiftCategory extends Model
         'name',
         'slug'
     ];
+
+    public function gifts()
+    {
+        return $this->hasMany(Gift::class);
+    }
 }

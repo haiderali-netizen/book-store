@@ -54,7 +54,7 @@ class StationaryCategoryController extends Controller
      */
     public function show(StationaryCategory $stationaryCategory)
     {
-        //
+        dd("sdkda");
     }
 
     /**
