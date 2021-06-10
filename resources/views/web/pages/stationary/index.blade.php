@@ -56,7 +56,8 @@
                                     {{ $stationary->price }}
                                     <span class="text-dull"><s>{{ $stationary->price*2 }}</s></span>
                                 </p>
-                                <div class="btn btn-primary btn-sm AddToCart" productid="{{ $stationary->id }}">Add to
+                                <div class="btn btn-primary btn-sm AddToCart" productPrice="{{ $stationary->price }}"
+                                    productType="stationary" productid="{{ $stationary->id }}">Add to
                                     cart
                                 </div>
 

@@ -70,7 +70,8 @@
                                     <%product.salePrice%>
                                     <span class="text-dull"><s><%product.price%></s></span>
                                 </p>
-                                <div class="btn btn-primary btn-sm AddToCart" productid="<%product.id%>">Add to cart
+                                <div class="btn btn-primary btn-sm AddToCart" productPrice="<%product.price%>"
+                                    productType="book" productid="<%product.id%>">Add to cart
                                 </div>
 
                             </div>

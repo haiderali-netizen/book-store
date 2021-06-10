@@ -1,130 +1,158 @@
 @include ('web/include/header')
 
-    <section>
+<section>
     <div class="cart-bg">
         <div class="container">
-          <div class="row">
-            <div class="col-md-12 cart-heading">
-                <h1>Shoping Cart</h1>
+            <div class="row">
+                <div class="col-md-12 cart-heading">
+                    <h1>Shoping Cart</h1>
+                </div>
             </div>
-          </div>
         </div>
 
     </div>
 
-    </section>
-
-    <div class="container mt-6">
-
-
-
-<section class="">
-<div class="alert alert-danger errorAjax"></div>
-<div class="shopping-cart">
-
-<div class="column-labels">
-  <label class="product-image">Image</label>
-  <label class="product-details">Product</label>
-  <label class="product-quantity">Quantity</label>
-  <label class="product-price">Price</label>
-  <label class="product-line-price">Total</label>
-</div>
-@foreach($cartOld as $car)
-  @php
-    $book = $car->GetBook();
-    $SaleData = $book->GetSaleData();
-    if($SaleData == "error"){
-      $price = $book->price;
-    }else{
-      $saleper = ($book->price/100)*$SaleData->salePercent;
-      $price = $book->price - $saleper;
-    }
-  @endphp
-  <div class="product">
-    <div class="product-image">
-      <img src="{{URL:: to('storage/app')}}/{{$book->cover_image}}" class="img-fluid mr-3">
-    </div>
-    <div class="product-details">
-      <div class="product-title">{{$book->name}}</div>
-      <p class="product-description">{{$book->description}}</p>
-    </div>
-    <div class="product-quantity">
-      <input type="number" class="border-0 quantityFlied" tableId="{{$car->id}}" value="{{$car->quantity}}" min="1">
-    </div>
-    <div class="product-price pricePerUnit">{{$price}}</div>
-    <div class="product-line-price totalData">{{$price * $car->quantity}}</div>
-  </div>
-@endforeach
-
-    <div class="row">
-      <div class="col-md-6">
-        <form action="{{URL::to('/coupon-apply')}}" method="post">
-          <p class="text-danger">
-            @php
-              if(Session::has('error')){
-                echo Session::get('error');
-              }
-            @endphp
-          </p>
-          <div class="d-flex">
-              <div class="form-input mr-3">
-                <input type="text" name="couponCode" class="form-control" placeholder="Enter Code Here">
-              </div>
-              <button class="btn btn-coupan">APPLY COUPAN</button>
-          </div>
-        </form>
-      </div>
-      <div class="col-md-6">
-      <div class="totals">
-  <div class="totals-item">
-    <label>Subtotal</label>
-    <div class="totals-value subTotal" id="cart-subtotal">71.97</div>
-  </div>
-  <div class="totals-item">
-    <label>Tax (5%)</label>
-    <div class="totals-value tax" id="cart-tax">3.60</div>
-  </div>
-  <div class="totals-item">
-    <label>Shipping</label>
-    <div class="totals-value shipping" id="cart-shipping">15.00</div>
-  </div>
-  <div class="totals-item">
-    <label>Discount %</label>
-    @php
-      if(Session::has('couponApplySuccess')){
-        $dicountPerct = Session::get('couponApplySuccess');
-      }else{
-        $dicountPerct = 0;
-      }
-    @endphp
-    <div class="discountPercant" style="text-align: right;">{{$dicountPerct}}</div>
-  </div>
-  <div class="totals-item totals-item-total">
-    <label>Grand Total</label>
-    <div class="totals-value GrandTotal" id="cart-total">90.57</div>
-  </div>
-</div>
-      </div>
-    </div>
-
-
-</div>
-<form action="{{URL::to('saveOrder')}}" id="CheckoutForm" method="post">
-      <input type="hidden" name="grandPrice" id="totalGrandPrice">
-</form>
-<div class="d-flex justify-content-end mt-3">
-    <button class="btn btn-checkout mr-3">Continue Shoping</button>
-    <button class="btn btn-checkout CheckoutFormBtn">Process to checkout</button>
-    </div>
 </section>
 
+<div class="container mt-6">
 
-@include ('web/include/footer')
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <section class="">
+        <div class="alert alert-danger errorAjax"></div>
+        <div class="shopping-cart">
+
+            <div class="column-labels">
+                <label class="product-image">Categpry</label>
+                <label class="product-details">Product</label>
+                <label class="product-quantity">Quantity</label>
+                <label class="product-price">Price</label>
+                <label class="product-line-price">Total</label>
+            </div>
+            @foreach($cartOld as $cart)
+            {{-- @php
+            $book = $car->GetBook();
+            $SaleData = $book->GetSaleData();
+            if($SaleData == "error"){
+            $price = $book->price;
+            }else{
+            $saleper = ($book->price/100)*$SaleData->salePercent;
+            $price = $book->price - $saleper;
+            }
+            @endphp --}}
+            <div class="product">
+                <div class="product-image">
+                    {{-- @if($cart->type == 'book')
+                    {{ $ }}
+                    <img src="{{URL:: to('storage/app')}}/" class="img-fluid mr-3">
+                    @elseif ($cart->type == 'stationary')
+                    @else
+                    @endif --}}
+                    {{ ucfirst($cart->type) }}</>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">
+                        @if($cart->type == 'book')
+                        {{ App\Models\Book::where('id', $cart->productId)->value('name') }}
+                        {{-- <img src="{{URL:: to('storage/app')}}/" class="img-fluid mr-3"> --}}
+                        @elseif ($cart->type == 'stationary')
+                        {{ App\Models\Stationary::where('id', $cart->productId)->value('name') }}
+                        @else
+                        {{ App\Models\Gift::where('id', $cart->productId)->value('title') }}
+                        @endif
+                    </div>
+                    <p class="product-description">
+                        @if($cart->type == 'book')
+                        {{ App\Models\Book::where('id', $cart->productId)->value('description') }}
+                        {{-- <img src="{{URL:: to('storage/app')}}/" class="img-fluid mr-3"> --}}
+                        @elseif ($cart->type == 'stationary')
+                        {{ App\Models\Stationary::where('id', $cart->productId)->value('description') }}
+                        @else
+                        {{ App\Models\Gift::where('id', $cart->productId)->value('description') }}
+                        @endif
+                    </p>
+                </div>
+                <div class="product-quantity">
+                    <input type="number" class="border-0 quantityFlied" tableId="{{$cart->id}}"
+                        value="{{$cart->quantity}}" min="1">
+                </div>
+                <div class="product-price pricePerUnit">
+                    {{ $cart->price }}
+                </div>
+                <div class="product-line-price totalData">{{$cart->price * $cart->quantity}}</div>
+            </div>
+            @endforeach
+
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="{{URL::to('/coupon-apply')}}" method="post">
+                        <p class="text-danger">
+                            @php
+                            if(Session::has('error')){
+                            echo Session::get('error');
+                            }
+                            @endphp
+                        </p>
+                        <div class="d-flex">
+                            <div class="form-input mr-3">
+                                <input type="text" name="couponCode" class="form-control" placeholder="Enter Code Here">
+                            </div>
+                            <button class="btn btn-coupan">APPLY COUPAN</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="totals">
+                        <div class="totals-item">
+                            <label>Subtotal</label>
+                            <div class="totals-value subTotal" id="cart-subtotal">71.97</div>
+                        </div>
+                        <div class="totals-item">
+                            <label>Tax (5%)</label>
+                            <div class="totals-value tax" id="cart-tax">3.60</div>
+                        </div>
+                        <div class="totals-item">
+                            <label>Shipping</label>
+                            <div class="totals-value shipping" id="cart-shipping">15.00</div>
+                        </div>
+                        <div class="totals-item">
+                            <label>Discount %</label>
+                            @php
+                            if(Session::has('couponApplySuccess')){
+                            $dicountPerct = Session::get('couponApplySuccess');
+                            }else{
+                            $dicountPerct = 0;
+                            }
+                            @endphp
+                            <div class="discountPercant" style="text-align: right;">{{$dicountPerct}}</div>
+                        </div>
+                        <div class="totals-item totals-item-total">
+                            <label>Grand Total</label>
+                            <div class="totals-value GrandTotal" id="cart-total">90.57</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <form action="{{URL::to('saveOrder')}}" id="CheckoutForm" method="post">
+            <input type="hidden" name="grandPrice" id="totalGrandPrice">
+
+        </form>
+        <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-checkout mr-3">Continue Shoping</button>
+            <button class="btn btn-checkout CheckoutFormBtn">Process to checkout</button>
+        </div>
+    </section>
+
+
+    @include ('web/include/footer')
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script>
-$(".CheckoutFormBtn").on('click',function(){
+    <script>
+        $(".CheckoutFormBtn").on('click',function(){
   var amountFinel = $(".GrandTotal").text();
   console.log(amountFinel);
   $("#totalGrandPrice").val(amountFinel);
@@ -185,5 +213,4 @@ $(".CheckoutFormBtn").on('click',function(){
       }
     });
   });
-</script>
-
+    </script>

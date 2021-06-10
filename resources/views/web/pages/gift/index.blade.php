@@ -56,7 +56,8 @@
                                     {{ $gift->price }}
                                     <span class="text-dull"><s>{{ $gift->price*1.2 }}</s></span>
                                 </p>
-                                <div class="btn btn-primary btn-sm AddToCart" productid="{{ $gift->id }}">Add To Cart
+                                <div class="btn btn-primary btn-sm AddToCart" productPrice="{{ $gift->price }}"
+                                    productType="gift" productid="{{ $gift->id }}">Add To Cart
                                 </div>
                             </div>
                         </div>

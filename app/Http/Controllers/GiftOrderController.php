@@ -14,7 +14,7 @@ class GiftOrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.gift.order.index');
     }
 
     /**

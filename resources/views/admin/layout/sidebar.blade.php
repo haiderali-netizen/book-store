@@ -67,7 +67,7 @@ endif;
                 <a href="{{ Route('gift-category.index') }}">Categories</a>
             </li>
             <li>
-                <a href="{{ Route('gift-category.index') }}">Orders</a>
+                <a href="{{ Route('gift-order.index') }}">Orders</a>
             </li>
         </ul>
     </li>

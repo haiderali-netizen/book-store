@@ -155,7 +155,9 @@
   $(".AddToCart").on("click",function () {
      console.log("ads");
     var productId = $(this).attr("productid");
-    var url = "{{URL::to('addToCart')}}" + "/" + productId;
+    var productType = $(this).attr("productType");
+    var productPrice = $(this).attr("productPrice");
+    var url = "{{URL::to('addToCart')}}" + "?productId=" + productId + "&productType="+ productType + "&price=" + productPrice;
     $(function() {
       $.ajax({
           type: "POST",

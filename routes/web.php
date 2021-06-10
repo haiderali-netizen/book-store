@@ -16,6 +16,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\GiftCategoryController;
 use App\Http\Controllers\GiftController;
+use App\Http\Controllers\GiftOrderController;
 use App\Http\Controllers\MetaTagsController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\OrderController;
@@ -68,7 +69,7 @@ Route::prefix('/')->middleware("IsVisitor")->group(function () {
     Route::post('/loginProcess', [HomeController::class, 'loginProcess']);
     Route::post('/RegistrationProcess', [HomeController::class, 'RegistrationProcess']);
     Route::get('/logout', [HomeController::class, 'logoutProcess']);
-    Route::post('/addToCart/{id}', [HomeController::class, 'AddToCart']);
+    Route::post('/addToCart', [HomeController::class, 'AddToCart']);
     Route::post('/CartQuantity/{id}', [HomeController::class, 'CartQuantity']);
     Route::post('/newsletterSubscription', [NewsLetterController::class, 'AddProcess']);
     Route::post('/saveOrder', [OrderController::class, 'saveOrder']);
@@ -99,6 +100,7 @@ Route::prefix('admin')->middleware("IsLogin")->group(function () {
     // gift routes
     Route::resource('gift-category', GiftCategoryController::class);
     Route::resource('gift', GiftController::class);
+    Route::resource('gift-order', GiftOrderController::class);
 
 
     // newsLetter Tags
