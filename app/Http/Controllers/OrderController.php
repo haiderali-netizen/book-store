@@ -104,7 +104,7 @@ class OrderController extends Controller
     public function OrderDetail(Request $request, $id)
     {
         $data = OrderModel::find($id);
-        $totalData = OrderProductsModel::where('orderId', $data->id)->get();
-        return view('admin.order.detailOrder', compact("totalData"));
+        $order = OrderProductsModel::where('orderId', $data->id)->get();
+        return view('admin.order.detailOrder', compact("order"));
     }
 }
