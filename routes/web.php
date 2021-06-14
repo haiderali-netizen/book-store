@@ -22,6 +22,7 @@ use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Pages\GiftController as PagesGiftController;
 use App\Http\Controllers\Pages\StationaryController as PublicStationaryController;
+use App\Http\Controllers\PdfOrderController;
 use App\Http\Controllers\StationaryCategoryController;
 use App\Http\Controllers\StationaryController;
 use App\Http\Controllers\StationaryOrderController;
@@ -75,9 +76,9 @@ Route::prefix('/')->middleware("IsVisitor")->group(function () {
     Route::post('/saveOrder', [OrderController::class, 'saveOrder']);
     Route::get('/orders', [OrderController::class, 'Order']);
     Route::get('/order-detail/{id}', [OrderController::class, 'OrderPreview']);
-    Route::get('/pdf-order', [OrderController::class, 'PDFOrder']);
-    Route::post('/pdf-order', [OrderController::class, 'PDFOrderProcess']);
-
+    // Route::get('/pdf-order', [OrderController::class, 'PDFOrder']);
+    // Route::post('/pdf-order', [OrderController::class, 'PDFOrderProcess']);
+    Route::resource('pdf-order', PdfOrderController::class);
     Route::get('stationary', [PublicStationaryController::class, 'all_stationary']);
     Route::get('stationary/{category}', [PublicStationaryController::class, 'stationary']);
     Route::get('gift', [PagesGiftController::class, 'all_gifts']);
@@ -119,7 +120,9 @@ Route::prefix('admin')->middleware("IsLogin")->group(function () {
         Route::get("/send-mail/add", [OrderController::class, "SendMailAdd"]);
         Route::post("/send-mail/add", [OrderController::class, "SendMailAddProcess"]);
     });
-    Route::get("/pdf-orders", [OrderController::class, "PDFOrderView"]);
+
+    Route::resource('pdf-orders', PdfOrderController::class);
+    // Route::get("/pdf-orders", [OrderController::class, "PDFOrderView"]);
     Route::post("/pdf-orders", [OrderController::class, "PDFPerPageProcess"]);
     // Meta Tags
     Route::group(['prefix' => 'meta-tags'], function () {

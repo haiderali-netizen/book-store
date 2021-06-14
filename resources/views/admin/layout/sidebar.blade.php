@@ -78,7 +78,7 @@ endif;
             <a href="{{URL::to('admin/orders')}}">Orders</a>
         </li>
         <li>
-            <a href="{{URL::to('admin/pdf-orders')}}">PDF Orders</a>
+            <a href="{{ Route('pdf-orders.index') }}">PDF Orders</a>
         </li>
     </ul>
 </li>

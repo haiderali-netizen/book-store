@@ -15,7 +15,7 @@
                     <a class="dropdown-item" href="{{ url('all-author') }}">AUTHOR</a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="{{ url('pdf-order') }}">PDF ORDERS</a>
+                    <a class="dropdown-item" href="{{ Route('pdf-order.create') }}">PDF ORDERS</a>
                 </li>
                 <li>
                     <a class="dropdown-item" href="{{ url('stationary') }}">STATIONARY</a>

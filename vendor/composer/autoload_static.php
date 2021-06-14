@@ -580,6 +580,7 @@ class ComposerStaticInitde4394872c55df9496849392c53e5833
         'App\\Models\\PDFOrderModel' => __DIR__ . '/../..' . '/app/Models/PDFOrderModel.php',
         'App\\Models\\PDFTotalPriceModel' => __DIR__ . '/../..' . '/app/Models/PDFTotalPriceModel.php',
         'App\\Models\\PageContentModel' => __DIR__ . '/../..' . '/app/Models/PageContentModel.php',
+        'App\\Models\\PdfOrder' => __DIR__ . '/../..' . '/app/Models/PdfOrder.php',
         'App\\Models\\RatingModel' => __DIR__ . '/../..' . '/app/Models/RatingModel.php',
         'App\\Models\\SaleModel' => __DIR__ . '/../..' . '/app/Models/SaleModel.php',
         'App\\Models\\SocialMediaModel' => __DIR__ . '/../..' . '/app/Models/SocialMediaModel.php',

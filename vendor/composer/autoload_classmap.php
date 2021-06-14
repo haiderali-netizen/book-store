@@ -72,6 +72,7 @@ return array(
     'App\\Models\\PDFOrderModel' => $baseDir . '/app/Models/PDFOrderModel.php',
     'App\\Models\\PDFTotalPriceModel' => $baseDir . '/app/Models/PDFTotalPriceModel.php',
     'App\\Models\\PageContentModel' => $baseDir . '/app/Models/PageContentModel.php',
+    'App\\Models\\PdfOrder' => $baseDir . '/app/Models/PdfOrder.php',
     'App\\Models\\RatingModel' => $baseDir . '/app/Models/RatingModel.php',
     'App\\Models\\SaleModel' => $baseDir . '/app/Models/SaleModel.php',
     'App\\Models\\SocialMediaModel' => $baseDir . '/app/Models/SocialMediaModel.php',

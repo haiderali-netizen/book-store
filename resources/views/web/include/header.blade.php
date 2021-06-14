@@ -54,10 +54,10 @@
         <form action="{{URL::to('searchItemFind')}}" method="post">
             <div class="container">
                 <header class="bg-white">
-                    <div class="row bd-bottom">
+                    <div class="row bd-bottom w-100">
                         <div class="col-md-12 col-sm-12 col-lg-12">
                             <nav class="">
-                                <div class="row">
+                                <div class="row w-100">
                                     <div class="w10">
                                         <a class="navbar-brand" href="{{ env('APP_URL') }}">
                                             <img src="{{ asset($logo != null ? $logo->image : '') }}" class="img-fluid"
@@ -88,8 +88,8 @@
                                             </div>
                                             <div class="width-input">
                                                 <input type="search" name="terms"
-                                                    class="form-control form-control-height searchsite" id="searchsite"
-                                                    required autocomplete="off">
+                                                    class="form-control form-control-height" id="searchsite" required
+                                                    autocomplete="off">
                                             </div>
                                             <div>
                                                 <button class="input-group-append bordr btn p-0 bg-white" type="submit">
@@ -170,5 +170,11 @@
 
             .dropdown-toggle::after {
                 display: none !important;
+            }
+
+            .form-control:focus {
+                border-color: inherit;
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
         </style>
