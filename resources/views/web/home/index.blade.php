@@ -298,7 +298,7 @@
             <div class="col-md-12">
                 <h2 class="text-title">Book On Sale</h2>
                 <div class="owl-carousel owl-theme owl3 mt-3">
-                    @foreach ($AllSale as $sale)
+                    @foreach ($sales as $sale)
                     @php
                     $book = $sale->GetBook();
                     $category = $book->GetCategory();

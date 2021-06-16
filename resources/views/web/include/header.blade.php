@@ -38,6 +38,8 @@
     <!-- Fav Icon -->
     <link rel="icon" type="image/png" href="{{ asset($favicon != null ? $favicon->image : '') }}">
     <!-- style file -->
+    <link rel="stylesheet" href="{{ asset('slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('slick/slick-theme.css') }}">
     <link href="{{ asset('assests/css/style.css')}}" rel="stylesheet">
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">

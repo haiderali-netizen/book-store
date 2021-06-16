@@ -36,7 +36,7 @@ endif;
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <label for=""> Book Type</label>
-            <select name="typeId" class="form-control">
+            <select name="typeId" class="form-control typeId">
                 <option value="">None</option>
                 @foreach($BookType as $typ)
                 <option value="{{$typ->id}}" {{$typ->id == $data->typeId ? 'selected' : ''}}>{{$typ->name}}</option>
@@ -74,10 +74,24 @@ endif;
             @endif
         </div>
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                 <img src="{{ asset($data->cover_image) }}" alt="" class="mb-2" width="100px" height="100px">
+                <label for=""> Image</label>
                 <input type="file" name="cover_image" class="form-control">
             </div>
+            @if($data->typeId == 1)
+            <div class="col-sm-6" id="bookFile">
+                <label for="book">E-Book File* {{ $data->file }} </label>
+                <input type="file" name="e-book" class="form-control file" required>
+            </div>
+            @else
+            <div class="col-sm-6 d-none" id="bookFile">
+                <label for="book">E-Book File* {{ $data->file }} </label>
+                <input type="file" name="e-book" class="form-control file" disabled required>
+            </div>
+            @endif
+        </div>
+        <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <label for=""> Short Description</label>
                 <textarea name="description" class="form-control">{{$data->description}}</textarea>
@@ -106,4 +120,24 @@ endif;
         </div><br />
         <input type="submit" class="btn btn-primary" value="Update">
 </form>
+@endsection
+
+
+@section('scripts')
+
+<script>
+    const bookType = document.querySelector(".typeId");
+    const bookFile = document.querySelector("#bookFile")
+    const file = document.querySelector(".file")
+    bookType.addEventListener('change',() => {
+        if(bookType.value == 1)
+        {
+           bookFile.classList.remove('d-none');
+           file.removeAttribute('disabled');
+        }else{
+            file.setAttribute('disabled', true);
+            bookFile.classList.add('d-none');
+        }
+    });
+</script>
 @endsection

@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
-            <div id="books" ng-app='angularDemo' ng-cloak>
+            <div ng-app='angularDemo' ng-cloak>
                 <div class="mainPage" ng-controller="angularController as ctrl">
                     <div class="sidebar" layout-padding>
                         <div class="parent-container">
@@ -66,14 +66,15 @@
                             </div>
                             <div ng-show="changeText">
                                 <br>
-                                <p>
+                                {{-- <p>
                                     <%product.salePrice%>
                                     <span class="text-dull"><s><%product.price%></s></span>
-                                </p>
-                                <div class="btn btn-primary btn-sm AddToCart" productPrice="<%product.price%>"
+                                </p> --}}
+                                {{-- <div class="btn btn-primary btn-sm AddToCart" productPrice="<%product.price%>"
                                     productType="book" productid="<%product.id%>">Add to cart
-                                </div>
-
+                                </div> --}}
+                                <a href='<% product.file  %>' class="btn btn-primary"
+                                    download="<% product.name %>">Download</a>
                             </div>
                         </div>
                     </div>
@@ -81,13 +82,13 @@
             </div>
             <div class="text-center">
                 @if($pages->lastPage() <= Request('page') ) <a class="see-more"
-                    href="{{ env('APP_URL'). Request('page')? 'all-book?page='. (Request('page') -1) : 'all-book?page='.'1' }}">
+                    href="{{ env('APP_URL'). Request('page')? 'e-book?page='. (Request('page') -1) : 'e-book?page='.'1' }}">
                     Back
                     </a>
                     @endif
                     @if(Request('page') != null)
                     @if($pages->currentPage() < $pages->lastPage() ) <a class="see-more"
-                            href="{{ env('APP_URL'). Request('page')? 'all-book?page='. (Request('page') + 1) : 'all-book?page='.'1' }}">
+                            href="{{ env('APP_URL'). Request('page')? 'e-book?page='. (Request('page') + 1) : 'e-book?page='.'1' }}">
                             See more
                         </a>
                         @endif
@@ -95,7 +96,7 @@
                         --}}
                         @else
                         <a class="see-more"
-                            href="{{ env('APP_URL'). Request('page')? 'all-book?page='. (Request('page') + 1) : 'all-book?page='.'1' }}">
+                            href="{{ env('APP_URL'). Request('page')? 'e-book?page='. (Request('page') + 1) : 'e-book?page='.'1' }}">
                             See more
                         </a>
                         @endif
@@ -228,22 +229,6 @@
 </style>
 
 <script>
-    $(".see-more").click(function() {
-    $div = $($(this).data('div')); //div to append
-    $link = $(this).data('link'); //current URL
-
-    $page = $(this).data('page'); //get the next page #
-    $href = $link + $page; //complete URL
-    $.get($href, function(response) { //append data
-    $html = $(response).find("#books").html();
-    $div.append($html);
-    });
-
-    $(this).data('page', (parseInt($page) + 1)); //update page #
-    });
-</script>
-
-<script>
     $(function() {
   $('.plus-minus-toggle').on('click', function() {
     $(this).toggleClass('collapsed');
@@ -369,6 +354,7 @@ $interpolateProvider.endSymbol("%>");
                 id: "{{$page->id}}",
                 name: "{{$name}}",
                 image: "{{ $page->cover_image }}",
+                file: "{{ $page->file }}",
                 rating: 3,
                 @if($result == "error")
                   price: "",

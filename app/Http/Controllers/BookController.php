@@ -59,6 +59,7 @@ class BookController extends Controller
             $data['authorId'] = $value['id'];
             $data['pending'] = 1;
         }
+        $data['file'] = $request->file('e-book') ? $this->imgUpload('book-pdf/', $request->file('e-book')) : '';
         $data["cover_image"] = $this->imgUpload('images/', $request->file("cover_image"));
         $data["editor1"] = htmlentities($data["editor1"]);
         $data["detailDescription"] = $data["editor1"];
@@ -106,6 +107,10 @@ class BookController extends Controller
         $data = $request->all();
         if ($request->file("cover_image") != null) {
             $data["cover_image"] = $this->imgUpload('image/', $request->file("cover_image"));
+        }
+
+        if ($request->file("e-book")) {
+            $data["file"] = $this->imgUpload('book-pdf/', $request->file("e-book"));
         }
         if (!isset($request->recommded_all)) {
             $data["recommded_all"] = 0;

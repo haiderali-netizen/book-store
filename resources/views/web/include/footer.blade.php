@@ -150,6 +150,15 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="{{ asset('slick/slick.js') }}"></script>
+<script>
+    $('.one-time').slick({
+    dots: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    touchMove: false
+    });
+</script>
 <script>
     $(function() {
   $(".AddToCart").on("click",function () {

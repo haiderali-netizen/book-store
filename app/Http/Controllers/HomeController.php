@@ -32,7 +32,7 @@ class HomeController extends Controller
         $HomeContent = PageContentModel::all();
         $MainSlider = MainSliderModel::all();
         $happyCustomer = ClientModel::where('block', 0)->get();
-        $AllSale = SaleModel::orderBy('id', 'desc')->get();
+        $sales = SaleModel::orderBy('id', 'desc')->take(5)->get();
         $featuredBook = BookModel::orderBy('id', 'desc')->where('feature', 1)->where('pending', 0)->take(6)->get();
         $recommdedAllBook = BookModel::orderBy('id', 'desc')->where('recommded_all', 1)->where('pending', 0)->get();
         $recommdedOnlyBook = BookModel::orderBy('id', 'desc')->where('recommded_only', 1)->where('pending', 0)->get();
@@ -48,7 +48,7 @@ class HomeController extends Controller
         $allAuthor = UserModel::where('usertype', 2)->where('pending', 0)->get();
         $allNews = NewsModel::orderBy('id', 'desc')->where('pending', 0)->take(4)->get();
         $meta = MetaTagsModel::where('name_page', 'Home')->first();
-        return view('web.home.index', compact('allBooks', 'allAuthor', 'FlashSaleTime', 'HomeContent', 'MainSlider', 'AllSale', 'featuredBook', 'recommdedAllBook', 'recommdedOnlyBook', 'FlashSaleBooks', 'SpecialOfferBooks', 'allNews', 'totalTestimonial', 'happyCustomer', 'meta'));
+        return view('web.home.index', compact('allBooks', 'allAuthor', 'FlashSaleTime', 'HomeContent', 'MainSlider', 'sales', 'featuredBook', 'recommdedAllBook', 'recommdedOnlyBook', 'FlashSaleBooks', 'SpecialOfferBooks', 'allNews', 'totalTestimonial', 'happyCustomer', 'meta'));
     }
 
     // Registration page
@@ -226,7 +226,7 @@ class HomeController extends Controller
     {
         $meta = MetaTagsModel::where('name_page', 'E Books')->first();
         $pages = BookModel::orderBy('id', 'desc')->where('pending', 0)->where('typeId', 1)->paginate(12);
-        return view('web.books.books', compact('pages', 'meta'));
+        return view('web.books.e-books', compact('pages', 'meta'));
     }
 
     //  Login  foundapge
