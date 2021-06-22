@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Models\AddToCartModel;
+use App\Models\BookCategoryModel;
 use App\Models\BookModel;
+use App\Models\BookTypeModel;
 use App\Models\Gift;
 use App\Models\GiftCategory;
+use App\Models\PdfOrder;
 use App\Models\Stationary;
 use App\Models\StationaryCategory;
 use Illuminate\Http\Request;
@@ -25,10 +29,59 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::get('e-books', function (Request $request) {
+    return response()->json(BookModel::orderBy('id', 'desc')->where('pending', 0)->where('typeId', 1)->get());
+});
+
+Route::get('pdf-order', function (Request $request) {
+    PdfOrder::Create([
+        'file' => $this->fileUpload('pdf-orders/', $request->file('file')),
+        'pages' => $request->pages,
+        'size'  => $request->size,
+        'color' => $request->color,
+        'qty'   => $request->qty
+    ]);
+
+    return response()->json([
+        'status' => 200,
+        'message' => 'Pdf order placed successfully'
+    ]);
+});
+
+
 Route::get('books', function (Request $request) {
     return response()->json(BookModel::all());
 });
 
+Route::get('book-category', function (Request $request) {
+    return response()->json(BookCategoryModel::all());
+});
+
+
+Route::get('book-types', function (Request $request) {
+    return response()->json(BookTypeModel::all());
+});
+
+Route::post('add-to-cart', function (Request $request) {
+    $uniqid =  $request->session()->get("uniqid");
+    $idd = $uniqid;
+    $cartOld = AddToCartModel::where('sessionId', $idd)->where('productId', $request->productId)->first();
+    if ($cartOld == null) {
+        $cartnew = new AddToCartModel();
+        $cartnew->productId = $request->productId;
+        $cartnew->type      = $request->productType;
+        $cartnew->price     = $request->price;
+        $cartnew->sessionId = $idd;
+        $cartnew->save();
+    } else {
+        $cartOld->quantity += 1;
+        $cartOld->save();
+    }
+    return response()->json([
+        'status' => 200,
+        'message' => 'Add to cart item successfully'
+    ]);
+});
 
 
 Route::get('stationary', function (Request $request) {
